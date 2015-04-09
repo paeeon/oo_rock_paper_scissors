@@ -5,6 +5,19 @@
 
 class Player
   attr_accessor :choice
+
+  def paper?
+    (self.choice == 'p') ? true : false
+  end
+
+  def rock?
+    (self.choice == 'r') ? true : false
+  end
+
+  def scissors?
+    (self.choice == 's') ? true : false
+  end
+
 end
 
 class Computer < Player
@@ -19,14 +32,12 @@ class Human < Player
       puts "Choose one: P/R/S"
       self.choice = gets.chomp.downcase
     end until Game::CHOICES.keys.include?(choice)
-    self.choice
   end
 end
 
 class Game
   CHOICES = {'p' => 'Paper', 'r' => 'Rock', 's' => 'Scissors'}
   attr_reader :human, :computer
-  attr_writer :winner
 
   def initialize
     @human = Human.new
@@ -34,16 +45,14 @@ class Game
   end
 
   def determine_winner
-    if (human.choice == 'p' && computer.choice == 'r') || 
-      (human.choice == 'r' && computer.choice == 's') || 
-      (human.choice == 's' && computer.choice == 'p')
+    if (human.paper? && computer.rock?) || 
+      (human.rock? && computer.scissors?) || 
+      (human.scissors? && computer.paper?)
       human
-    elsif (computer.choice == 'p' && human.choice == 'r') || 
-      (computer.choice == 'r' && human.choice == 's') || 
-      (computer.choice == 's' && human.choice == 'p')
+    elsif (computer.paper? && human.rock?) || 
+      (computer.rock? && human.scissors?) || 
+      (computer.scissors? && human.paper?)
       computer
-    else
-      winner = nil
     end
   end
 
