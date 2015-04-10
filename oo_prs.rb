@@ -7,15 +7,15 @@ class Player
   attr_accessor :choice
 
   def paper?
-    (self.choice == 'p') ? true : false
+    choice == 'p'
   end
 
   def rock?
-    (self.choice == 'r') ? true : false
+    choice == 'r'
   end
 
   def scissors?
-    (self.choice == 's') ? true : false
+    choice == 's'
   end
 
 end
